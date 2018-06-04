@@ -24,8 +24,8 @@
   value:
     consumes:
       mysql:
-        from: mysql-clustered
-    name: mysql-clustered
+        from: pxc-mysql
+    name: pxc-mysql
     properties:
       admin_password: ((cf_mysql_mysql_admin_password))
       binlog_enabled: false
@@ -64,7 +64,7 @@
         server: ((mysql_server_certificate))
     provides:
       mysql:
-        as: mysql-clustered
+        as: pxc-mysql
     release: pxc
 - type: replace
   path: /instance_groups/name=database/jobs/name=proxy/release
@@ -72,7 +72,7 @@
 - type: replace
   path: /instance_groups/name=database/jobs/name=proxy/consumes?/mysql
   value:
-    from: mysql-clustered
+    from: pxc-mysql
 - type: replace
   path: /instance_groups/name=database/jobs/name=proxy/properties
   value:
@@ -107,7 +107,7 @@
   value:
     consumes:
       mysql:
-        from: mysql-clustered
+        from: pxc-mysql
     name: bootstrap
     release: pxc
 - type: replace
